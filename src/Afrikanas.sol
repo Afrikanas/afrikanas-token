@@ -9,9 +9,16 @@ import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20FlashMint.sol";
 
 /// @custom:security-contact seanemile.se@protonmail.com
-contract Afrikanas is ERC20, ERC20Burnable, Pausable, Ownable, ERC20Permit, ERC20FlashMint {
+contract Afrikanas is
+    ERC20,
+    ERC20Burnable,
+    Pausable,
+    Ownable,
+    ERC20Permit,
+    ERC20FlashMint
+{
     constructor() ERC20("Afrikanas", "AFK") ERC20Permit("Afrikanas") {
-        _mint(msg.sender, 10000000 * 10 ** decimals());
+        _mint(msg.sender, 10000000 * 10**decimals());
     }
 
     function pause() public onlyOwner {
@@ -26,11 +33,11 @@ contract Afrikanas is ERC20, ERC20Burnable, Pausable, Ownable, ERC20Permit, ERC2
         _mint(to, amount);
     }
 
-    function _beforeTokenTransfer(address from, address to, uint256 amount)
-        internal
-        whenNotPaused
-        override
-    {
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal override whenNotPaused {
         super._beforeTokenTransfer(from, to, amount);
     }
 }
